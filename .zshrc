@@ -59,3 +59,6 @@ BAT_THEME="Catppuccin Mocha"
 
 # ---- EZA ----
 alias ls="eza --icons=always --long --no-filesize --no-time --no-user --no-permissions"
+
+# ---- zoxide ----
+alias cd="z"
