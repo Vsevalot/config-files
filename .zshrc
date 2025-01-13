@@ -19,6 +19,8 @@ plugins=(
 
 source $ZSH/oh-my-zsh.sh
 
+alias v="nvim"
+
 # ---- FZF -----
 eval "$(fzf --zsh)"
 
@@ -61,4 +63,5 @@ BAT_THEME="Catppuccin Mocha"
 alias ls="eza --icons=always --long --no-filesize --no-time --no-user --no-permissions"
 
 # ---- zoxide ----
+# eval "$(zoxide init zsh)"  # first time only
 alias cd="z"
