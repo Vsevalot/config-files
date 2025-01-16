@@ -19,6 +19,13 @@ return {
         python = { "ruff" },
         golang = { "golines" },
       },
+      formatters = {
+        ruff = {
+          command = "ruff",
+          args = { "format", "-" }, -- "-" reads input from stdin
+          stdin = true,
+        },
+      },
       format_on_save = {
         lsp_fallback = true,
         async = false,
