@@ -63,5 +63,23 @@ BAT_THEME="Catppuccin Mocha"
 alias ls="eza --icons=always --long --no-filesize --no-time --no-user --no-permissions"
 
 # ---- zoxide ----
-# eval "$(zoxide init zsh)"  # first time only
+eval "$(zoxide init zsh)"
 alias cd="z"
+
+
+alias k=kubectl
+alias kd="kubectl describe"
+alias kget="kubectl config get-contexts"
+alias kuse="kubectl config use-context"
+alias aws-pierce-shell="k exec -it -c app deploy/pierce -- /vault/vault-env bash -c 'python src/manage.py shell -w'"
+alias aws-pierce-bash="k exec -it -c app deploy/pierce -- /vault/vault-env bash"
+alias cg="kubectl get pods -l managed_by=containerhub -o jsonpath='{range .items[*]}
+{\"id:      \"}{.metadata.name}
+{\"user:    \"}{.metadata.labels.user_id}
+{\"name:    \"}{.metadata.labels.container_name}
+{\"img:     \"}{.spec.containers[0].image}
+{\"cearted: \"}{.metadata.labels.created_at}
+{\"updated: \"}{.metadata.labels.updated_at}
+{\"---------------------------------\"}{end}'"
+
+source <(kubectl completion zsh)

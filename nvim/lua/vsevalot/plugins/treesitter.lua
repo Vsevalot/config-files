@@ -14,7 +14,14 @@ return {
       highlight = {
         enable = true,
       },
-      -- enable indentation
+
+      -- refactor = {
+      --   highlight_definitions = {
+      --     enable = true,
+      --     clear_on_cursor_move = true,
+      --   },
+      -- },
+      -- -- enable indentation
       indent = { enable = true },
       -- enable autotagging (w/ nvim-ts-autotag plugin)
       autotag = {
