@@ -34,6 +34,7 @@ return {
           luasnip.lsp_expand(args.body)
         end,
       },
+      preselect = "none",
       mapping = cmp.mapping.preset.insert({
         ["<Tab>"] = cmp.mapping.select_next_item(),
         ["<S-Tab>"] = cmp.mapping.select_prev_item(),
@@ -45,7 +46,7 @@ return {
       }),
       -- sources for autocompletion, order matters
       sources = cmp.config.sources({
-        { name = "nvim_lsp"},
+        { name = "nvim_lsp" },
         { name = "luasnip" }, -- snippets
         { name = "buffer" }, -- text within current buffer
         { name = "path" }, -- file system paths
