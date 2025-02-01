@@ -30,6 +30,7 @@ return {
         "cssls",
         "lua_ls",
         "pyright",
+        "eslint_d",
       },
     })
 
@@ -42,4 +43,3 @@ return {
     })
   end,
 }
-

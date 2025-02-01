@@ -9,7 +9,7 @@ return {
       typescript = { "eslint_d" },
       javascriptreact = { "eslint_d" },
       typescriptreact = { "eslint_d" },
-      -- python = { "ruff" },  -- no need in two python linters
+      -- python = { "ruff" },  -- no need in two python linters, I have pyright but it in other file ... seems stupid
     }
 
     local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })

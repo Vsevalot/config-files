@@ -6,7 +6,7 @@ opt.clipboard = "unnamedplus"
 
 -- enable nubers and activate relative numbers
 opt.number = true
-opt.relativenumber = true
+-- opt.relativenumber = true
 
 opt.splitbelow = true -- change horizontal split to spawn new split below
 opt.splitright = true -- change vertical split to spawn new split on the right
