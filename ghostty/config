@@ -5,5 +5,8 @@ font-size = 20
 theme = catppuccin-mocha
 shell-integration-features = no-cursor,sudo,no-title
 cursor-style = block
-# background-opacity = 0.96
-
+mouse-hide-while-typing = true
+#background-opacity = 0.96
+#custom-shader = /Users/vsevolod.tetervak/.config/ghostty-shaders/in-game-crt.glsl
+#custom-shader = /Users/vsevolod.tetervak/.config/ghostty-shaders/starfield.glsl
+#custom-shader = /Users/vsevolod.tetervak/.config/ghostty-shaders/matrix-hallway.glsl

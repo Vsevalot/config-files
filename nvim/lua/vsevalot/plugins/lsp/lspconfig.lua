@@ -108,10 +108,15 @@ return {
           capabilities = capabilities,
           settings = {
             python = {
-              venvPath = ".",
+              venvPath = ".venv",
               pythonPath = ".venv/bin/python",
             },
           },
+        })
+      end,
+      ["ruff"] = function()
+        lspconfig["ruff"].setup({
+          cmd = "",
         })
       end,
     })
