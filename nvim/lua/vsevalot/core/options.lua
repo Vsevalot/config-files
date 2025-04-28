@@ -20,6 +20,7 @@ opt.shiftwidth = 2 -- sets shit's length (> or <)
 
 -- this option breaks mouse a little
 opt.scrolloff = 5 -- keep screen in the middle when scrolling instead of going all way to the bottom
+-- opt.cmdheight = 2
 
 opt.virtualedit = "block" -- allow VISUAL BLOCK mode to select ares without any characters
 
