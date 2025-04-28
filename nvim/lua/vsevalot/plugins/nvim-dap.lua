@@ -68,9 +68,11 @@ return {
         dap.step_out()
       end, opts)
 
+      -- Frame up
       vim.keymap.set("n", "<leader>du", function()
         dap.up()
       end, opts)
+      -- Frame down
       vim.keymap.set("n", "<leader>dd", function()
         dap.down()
       end, opts)

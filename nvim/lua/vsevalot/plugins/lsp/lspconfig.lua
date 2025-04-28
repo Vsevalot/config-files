@@ -7,6 +7,14 @@ return {
     { "folke/neodev.nvim", opts = {} },
   },
   config = function()
+    opts = {
+      servers = {
+        ruff_lsp = {
+          mason = false,
+          enabled = false,
+        },
+      },
+    }
     -- import lspconfig plugin
     local lspconfig = require("lspconfig")
 
@@ -105,6 +113,9 @@ return {
       ["pyright"] = function()
         -- configure lua server (with special settings)
         lspconfig["pyright"].setup({
+          general = {
+            positionEncodings = { "utf-8" },
+          },
           capabilities = capabilities,
           settings = {
             python = {
@@ -112,11 +123,6 @@ return {
               pythonPath = ".venv/bin/python",
             },
           },
-        })
-      end,
-      ["ruff"] = function()
-        lspconfig["ruff"].setup({
-          cmd = "",
         })
       end,
     })

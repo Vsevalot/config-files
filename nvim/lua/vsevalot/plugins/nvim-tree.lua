@@ -12,7 +12,7 @@ return {
 
     nvimtree.setup({
       view = {
-        width = 35,
+        width = 50,
         relativenumber = true,
       },
       -- change folder arrow icons
@@ -56,5 +56,6 @@ return {
     keymap.set("n", "<leader>er", "<cmd>NvimTreeRefresh<CR>", { desc = "Refresh file explorer" }) -- refresh file explorer
     keymap.set("n", "<leader>eh", "<cmd>?<CR>", { desc = "NvimTree help" }) -- refresh file explorer
     -- keymap.set('n', '?',     api.tree.toggle_help,                  opts('Help'))
+    keymap.set("n", "<leader>et", "<cmd>NvimTreeRefresh<CR>", { desc = "Refresh file explorer" }) -- refresh file explorer
   end,
 }

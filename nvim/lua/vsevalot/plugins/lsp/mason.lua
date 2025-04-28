@@ -29,8 +29,7 @@ return {
         "html",
         "cssls",
         "lua_ls",
-        "pyright",
-        "eslint_d",
+        -- "eslint_d",
       },
     })
 
