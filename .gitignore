@@ -4,3 +4,4 @@
 /nvim-backup
 /tmux
 /nvim/lazy-lock.json
+.env
