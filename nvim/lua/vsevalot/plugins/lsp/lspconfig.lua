@@ -1,5 +1,6 @@
 return {
   "neovim/nvim-lspconfig",
+  tag = "v2.2.0",
   event = { "BufReadPre", "BufNewFile" },
   dependencies = {
     "hrsh7th/cmp-nvim-lsp",
@@ -7,19 +8,8 @@ return {
     { "folke/neodev.nvim", opts = {} },
   },
   config = function()
-    opts = {
-      servers = {
-        ruff_lsp = {
-          mason = false,
-          enabled = false,
-        },
-      },
-    }
     -- import lspconfig plugin
     local lspconfig = require("lspconfig")
-
-    -- import mason_lspconfig plugin
-    local mason_lspconfig = require("mason-lspconfig")
 
     -- import cmp-nvim-lsp plugin
     local cmp_nvim_lsp = require("cmp_nvim_lsp")
@@ -32,10 +22,25 @@ return {
         -- Buffer local mappings.
         -- See `:help vim.lsp.*` for documentation on any of the below functions
         local opts = { buffer = ev.buf, silent = true }
+        local opts_for_gr = {
+          buffer = ev.buf,
+          silent = true,
+          noremap = true, -- Ensure noremap is also here
+          nowait = true,
+        }
 
-        -- set keybinds
-        opts.desc = "Show LSP references"
-        keymap.set("n", "gr", "<cmd>Telescope lsp_references<CR>", opts) -- show definition, references
+        opts_for_gr.desc = "Show LSP references"
+        keymap.set("n", "gr", function()
+          vim.notify(
+            "GR (LspAttach Lua fn with nowait): Finding references for buffer " .. ev.buf,
+            vim.log.levels.INFO,
+            { title = "Keymap" }
+          )
+          require("telescope.builtin").lsp_references({})
+        end, opts_for_gr)
+        -- -- set keybinds
+        -- opts.desc = "Show LSP references"
+        -- keymap.set("n", "gr", "<cmd>Telescope lsp_references<CR>", opts) -- show definition, references
 
         opts.desc = "Go to declaration"
         keymap.set("n", "gD", vim.lsp.buf.declaration, opts) -- go to declaration
@@ -59,19 +64,7 @@ return {
         keymap.set("n", "<leader>D", "<cmd>Telescope diagnostics bufnr=0<CR>", opts) -- show  diagnostics for file
 
         opts.desc = "Show line diagnostics"
-        keymap.set("n", "<leader>d", vim.diagnostic.open_float, opts) -- show diagnostics for line
-
-        opts.desc = "Go to previous diagnostic"
-        keymap.set("n", "[d", vim.diagnostic.goto_prev, opts) -- jump to previous diagnostic in buffer
-
-        opts.desc = "Go to next diagnostic"
-        keymap.set("n", "]d", vim.diagnostic.goto_next, opts) -- jump to next diagnostic in buffer
-
-        opts.desc = "Show documentation for what is under cursor"
-        keymap.set("n", "K", vim.lsp.buf.hover, opts) -- show documentation for what is under cursor
-
-        opts.desc = "Restart LSP"
-        keymap.set("n", "<leader>rs", ":LspRestart<CR>", opts) -- mapping to restart lsp if necessary
+        keymap.set("n", "<leader>d", vim.diagnostic.open_float, opts_for_gr) -- show diagnostics for line
       end,
     })
 
@@ -86,45 +79,41 @@ return {
       vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
     end
 
-    mason_lspconfig.setup_handlers({
-      -- default handler for installed servers
-      function(server_name)
-        lspconfig[server_name].setup({
-          capabilities = capabilities,
-        })
-      end,
-      ["lua_ls"] = function()
-        -- configure lua server (with special settings)
-        lspconfig["lua_ls"].setup({
-          capabilities = capabilities,
-          settings = {
-            Lua = {
-              -- make the language server recognize "vim" global
-              diagnostics = {
-                globals = { "vim" },
-              },
-              completion = {
-                callSnippet = "Replace",
-              },
-            },
+    local function toggle_virtual_text()
+      local current_config = vim.diagnostic.config()
+      vim.diagnostic.config({
+        virtual_text = not current_config.virtual_text,
+      })
+      if not current_config.virtual_text then
+        vim.notify("Virtual text enabled", vim.log.levels.INFO, { title = "Diagnostics" })
+      else
+        vim.notify("Virtual text disabled", vim.log.levels.INFO, { title = "Diagnostics" })
+      end
+    end
+
+    -- 3. Set up the keymap `fz` to toggle virtual text
+    vim.keymap.set(
+      "n",
+      "<leader>t",
+      toggle_virtual_text,
+      { noremap = true, silent = true, desc = "Toggle diagnostic virtual text" }
+    )
+
+    lspconfig.pyright.setup({
+      capabilities = capabilities,
+      settings = {
+        python = {
+          analysis = {
+            autoSearchPaths = false,
           },
-        })
-      end,
-      ["pyright"] = function()
-        -- configure lua server (with special settings)
-        lspconfig["pyright"].setup({
-          general = {
-            positionEncodings = { "utf-8" },
-          },
-          capabilities = capabilities,
-          settings = {
-            python = {
-              venvPath = ".venv",
-              pythonPath = ".venv/bin/python",
-            },
-          },
-        })
-      end,
+          venvPath = ".venv",
+          pythonPath = ".venv/bin/python",
+        },
+      },
+    })
+
+    lspconfig.gopls.setup({
+      capabilities = capabilities,
     })
   end,
 }
