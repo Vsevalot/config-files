@@ -5,4 +5,5 @@
 /tmux
 /nvim/lazy-lock.json
 /github-copilot
+/raycast
 .env
