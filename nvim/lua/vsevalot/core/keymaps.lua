@@ -18,7 +18,7 @@ local function pytest_to_buffer()
     print("No file path associated with this buffer.")
     return
   end
-  local command_to_copy = "pdm run pytest " .. filepath
+  local command_to_copy = "pdm run pytest -vv " .. filepath
   -- Set the system clipboard register '+'
   -- vim.fn.setreg requires a table of strings (lines)
   vim.fn.setreg("+", { command_to_copy })
