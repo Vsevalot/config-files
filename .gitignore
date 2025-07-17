@@ -4,4 +4,5 @@
 /nvim-backup
 /tmux
 /nvim/lazy-lock.json
+/github-copilot
 .env
