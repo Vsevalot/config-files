@@ -2,7 +2,6 @@ vim.g.mapleader = " "
 
 local keymap = vim.keymap
 
-keymap.set("i", "jk", "<ESC>", { desc = "Exit insert modoe with jk" })
 keymap.set("n", "<leader>nh", ":noh<CR>", { desc = "Clear highlights" })
 
 -- window management

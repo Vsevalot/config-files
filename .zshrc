@@ -78,6 +78,8 @@ alias kuse="kubectl config use-context"
 alias aws-pierce-shell="k exec -it -c app deploy/pierce -- /vault/vault-env bash -c 'python src/manage.py shell -w'"
 alias aws-pierce-bash="k exec -it -c app deploy/pierce -- /vault/vault-env bash"
 alias aws-pierce-db="k -n practicum attach -it deployment/pierce-shell"
+# Does not work yet
+alias aws-prod-pierce-shell="k -n practicum attach -it deployment/pierce-shell bash -c 'python src/manage.py shell -w'"
 alias cg="kubectl get pods -l managed_by=containerhub -o jsonpath='{range .items[*]}
 {\"id:      \"}{.metadata.name}
 {\"user:    \"}{.metadata.labels.user_id}

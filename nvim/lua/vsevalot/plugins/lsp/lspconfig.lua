@@ -115,5 +115,8 @@ return {
     lspconfig.gopls.setup({
       capabilities = capabilities,
     })
+    lspconfig.ts_ls.setup({ -- npm install -g typescript-language-server typescript
+      capabilities = capabilities,
+    })
   end,
 }
